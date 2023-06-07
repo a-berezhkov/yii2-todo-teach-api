@@ -15,6 +15,7 @@ use yii\db\Expression;
  * @property string|null $created_at
  * @property string|null $updated_at
  * @property int|null $todo_id
+ * @property int|null $user_id
  *
  * @property Todo $todo
  */
@@ -45,12 +46,13 @@ class Tasks extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name'], 'required'],
-            [['id', 'isDone', 'todo_id'], 'integer'],
+            [[ 'name'], 'required'],
+            [[ 'isDone', 'todo_id'], 'integer'],
             [['name'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['id'], 'unique'],
             [['todo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Todo::className(), 'targetAttribute' => ['todo_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -66,6 +68,7 @@ class Tasks extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'todo_id' => 'Todo ID',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -77,5 +80,10 @@ class Tasks extends \yii\db\ActiveRecord
     public function getTodo()
     {
         return $this->hasOne(Todo::className(), ['id' => 'todo_id']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }
