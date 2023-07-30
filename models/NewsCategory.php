@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string|null $name
+ * @property int|null $created_by
  */
 class NewsCategory extends \yii\db\ActiveRecord
 {
@@ -27,6 +28,7 @@ class NewsCategory extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'string', 'max' => 255],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
         ];
     }
 
@@ -39,5 +41,15 @@ class NewsCategory extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
         ];
+    }
+
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
 }

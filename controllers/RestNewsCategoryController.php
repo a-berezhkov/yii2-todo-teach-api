@@ -1,16 +1,7 @@
 <?php
-
 namespace app\controllers;
 
-use app\models\Menu;
-use app\models\Tasks;
-use app\models\Todo;
-use yii\base\BaseObject;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\ContentNegotiator;
-use yii\filters\Cors;
 use yii\rest\ActiveController;
-use yii\web\Response;
 
 class RestNewsCategoryController extends ActiveController
 {
