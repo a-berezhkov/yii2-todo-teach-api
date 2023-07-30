@@ -61,7 +61,7 @@ class RestNewsController extends ActiveController
      * @return array|\yii\db\ActiveRecord[]
      */
     public function actionNewsByUserId($id){
-        return News::find()->where(['user_id' => $id])->all();
+        return News::find()->where(['created_by' => $id])->all();
     }
 
 }
