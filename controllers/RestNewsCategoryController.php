@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\NewsCategory;
 use yii\rest\ActiveController;
 
 class RestNewsCategoryController extends ActiveController
@@ -37,5 +38,11 @@ class RestNewsCategoryController extends ActiveController
 
         ]);
     }
-
+    /**
+     * @param $id
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function actionCategoryByUserId($id){
+        return NewsCategory::find()->where(['created_by' => $id])->all();
+    }
 }
