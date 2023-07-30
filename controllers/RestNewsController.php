@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Menu;
+use app\models\News;
 use app\models\Tasks;
 use app\models\Todo;
 use yii\base\BaseObject;
@@ -45,6 +46,22 @@ class RestNewsController extends ActiveController
             ],
 
         ]);
+    }
+
+    /**
+     * @param $id
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function actionNewsByCategoryId($id){
+        return News::find()->where(['category_id' => $id])->all();
+    }
+
+    /**
+     * @param $id
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function actionNewsByUserId($id){
+        return News::find()->where(['user_id' => $id])->all();
     }
 
 }
